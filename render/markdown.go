@@ -28,7 +28,9 @@ type Options struct {
 	AlignAttributes      bool
 	AutomaticHeadingIDs  bool // Goldmark IDs instead of GitHub-compatible Unicode IDs
 	Alerts, HeadingLinks bool
-	ResolveLink          func(string) string
+	// Math enables $…$ and $$…$$ formulas, which KaTeX renders in the browser.
+	Math        bool
+	ResolveLink func(string) string
 }
 
 type Document struct {
@@ -47,6 +49,9 @@ func NewMarkdown(o Options) goldmark.Markdown {
 		extensions = append(extensions, extension.Table)
 	}
 	extensions = append(extensions, extension.Strikethrough, extension.Linkify, extension.TaskList)
+	if o.Math {
+		extensions = append(extensions, mathExtension{})
+	}
 	opts := []goldmark.Option{goldmark.WithExtensions(extensions...)}
 	if o.RawHTML {
 		opts = append(opts, goldmark.WithRendererOptions(gmhtml.WithUnsafe()))

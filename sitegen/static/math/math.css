@@ -1,0 +1,2 @@
+/* Math: a display formula wider than the column scrolls instead of widening the page. */
+div.math-display { margin: 1rem 0; overflow-x: auto; overflow-y: hidden; }

@@ -92,7 +92,7 @@ for collisions.
 | `scripts` | string array | empty | Existing output-relative scripts, loaded after built-in JavaScript |
 | `directoryLinks` | boolean | false | Use directory URLs for index pages and search result links |
 | `repositoryLinks` | boolean | false | When a local link is not a published page or asset, link to its file or directory in the configured repository |
-| `bundledAssets` | boolean | true | Copy built-in CSS, JavaScript and theme assets |
+| `bundledAssets` | boolean | true | Copy built-in CSS, JavaScript and theme assets. Math assets under `assets/math/` are published whenever `markdown.math` is true, whatever this setting |
 | `redirectRules` | boolean | true | Emit the Netlify `_redirects` file for page redirects and aliases |
 | `redirectTemplate` | string | empty | Repository-relative Go template for redirect HTML; receives `.Config`, `.Href`, and `.Lang` |
 | `searchIndex` | object | see below | Select search output path, JavaScript variable and entry fields |
@@ -162,6 +162,7 @@ empty/default or `context` and `heading`; `headingText` accepts empty/default,
 | `rawHTML` | boolean | false | Permit raw HTML in Markdown |
 | `alerts` | boolean | false | Enable alert block post-processing |
 | `headingLinks` | boolean | false | Add links to rendered headings |
+| `math` | boolean | false | Render `$…$`, `$$…$$` and `math` fences with the built-in KaTeX; see [the math specification](../../spec/markdown-math.md) |
 | `headingIDs` | string | `unicode` | ID scheme: `unicode`, `github`, or `goldmark` |
 | `alignAttributes` | boolean | true | Use HTML alignment attributes for aligned table cells |
 

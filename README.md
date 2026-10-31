@@ -116,6 +116,7 @@ nested sections organize guides under a common navigation group:
     "rawHTML": false,
     "alerts": true,
     "headingLinks": true,
+    "math": true,
     "headingIDs": "unicode",
     "alignAttributes": true
   },
@@ -201,9 +202,10 @@ replacing whitespace with hyphens and suffixing duplicates with `-1`, `-2`, and
 so on. `github` uses GitHub-compatible slug rules; `goldmark` uses Goldmark's
 automatic IDs. The TOC includes H2 through H4.
 
-The `markdown` object controls extensions: `rawHTML` is disabled by default,
-`alerts` and `headingLinks` are disabled by default, and `alignAttributes`
-defaults to true. `headingIDs` accepts `unicode` (default), `github`, or
+The `markdown` object controls extensions: `rawHTML`, `alerts`, `headingLinks`
+and `math` are disabled by default, and `alignAttributes` defaults to true. With
+`math`, `$…$` and `$$…$$` write formulas that KaTeX renders in the browser; the
+[math specification](spec/markdown-math.md) defines the syntax and the assets. `headingIDs` accepts `unicode` (default), `github`, or
 `goldmark`. Set `searchHeadings` to include heading fragments in search results;
 it defaults to false.
 
@@ -243,7 +245,7 @@ the target route; they do not preserve arbitrary incoming query/fragment state.
 
 Raw HTML in Markdown is disabled by default. Fenced code, tables, task lists,
 strikethrough and normal Markdown are supported through Goldmark GFM. Language-
-specific syntax highlighting, math, Mermaid rendering, API reference generation
+specific syntax highlighting, Mermaid rendering, API reference generation
 and WebAssembly builds are extension points rather than bundled project
 features. Record indexes can generate design and optimization record lists.
 Write custom pages with a template or explicitly copied static HTML.

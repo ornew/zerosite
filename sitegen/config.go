@@ -66,6 +66,7 @@ type MarkdownOptions struct {
 	RawHTML         bool   `json:"rawHTML"`
 	Alerts          bool   `json:"alerts"`
 	HeadingLinks    bool   `json:"headingLinks"`
+	Math            bool   `json:"math"`
 	HeadingIDs      string `json:"headingIDs"`
 	AlignAttributes *bool  `json:"alignAttributes"`
 }

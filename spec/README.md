@@ -12,7 +12,7 @@ site excludes authoring templates by default.
 
 | Chapter | Defines |
 |:--|:--|
-| Add a chapter | Its exact contract and scope |
+| [Markdown math](markdown-math.md) | Formula syntax, its rendering, the assets and the page loading of `markdown.math` |
 
 ## Conventions
 

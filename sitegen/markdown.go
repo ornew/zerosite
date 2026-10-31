@@ -159,7 +159,7 @@ func parsePage(source string, data []byte, c Config, md goldmark.Markdown) (*Pag
 
 func markdown() goldmark.Markdown { return markdownWith(MarkdownOptions{}) }
 func markdownWith(o MarkdownOptions) goldmark.Markdown {
-	return render.NewMarkdown(render.Options{RawHTML: o.RawHTML, AlignAttributes: boolValue(o.AlignAttributes, true), AutomaticHeadingIDs: o.HeadingIDs == "goldmark"})
+	return render.NewMarkdown(render.Options{RawHTML: o.RawHTML, AlignAttributes: boolValue(o.AlignAttributes, true), AutomaticHeadingIDs: o.HeadingIDs == "goldmark", Math: o.Math})
 }
 func matchSection(source string, sections []Section) string {
 	for _, section := range sections {

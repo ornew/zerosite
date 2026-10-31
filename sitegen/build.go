@@ -25,6 +25,11 @@ var embedded embed.FS
 const marker = ".nanosite"
 const markerContent = "nanosite v1\n"
 
+// The math assets: the loader script, and the stylesheets that a page with a formula also links.
+const mathScript = "assets/math/math.js"
+
+var mathStyles = []string{"assets/math/katex.min.css", "assets/math/math.css"}
+
 type Result struct {
 	Pages []*Page
 	Out   string
@@ -315,7 +320,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 		return nil, err
 	}
 	for _, f := range static {
-		if !boolValue(c.BundledAssets, true) {
+		if f.IsDir() || !boolValue(c.BundledAssets, true) {
 			continue
 		}
 		data, e := embedded.ReadFile("static/" + f.Name())
@@ -323,6 +328,24 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 			return nil, e
 		}
 		if err := reserve("assets/"+f.Name(), data); err != nil {
+			return nil, err
+		}
+	}
+	// The math renderer is published with the math option, not with bundledAssets: it serves the
+	// formulas of any page, so it is needed whenever the option is set. A page loads it only when it
+	// contains a formula.
+	if c.Markdown.Math {
+		err := fs.WalkDir(embedded, "static/math", func(name string, d fs.DirEntry, err error) error {
+			if err != nil || d.IsDir() {
+				return err
+			}
+			data, e := embedded.ReadFile(name)
+			if e != nil {
+				return e
+			}
+			return reserve("assets/"+strings.TrimPrefix(name, "static/"), data)
+		})
+		if err != nil {
 			return nil, err
 		}
 	}
@@ -499,6 +522,12 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 		}
 		for _, name := range c.Scripts {
 			v.Scripts = append(v.Scripts, encodePath(relative(p.Output, name)))
+		}
+		if c.Markdown.Math && render.HasMath(body) {
+			for _, name := range mathStyles {
+				v.Styles = append(v.Styles, encodePath(relative(p.Output, name)))
+			}
+			v.Scripts = append(v.Scripts, encodePath(relative(p.Output, mathScript)))
 		}
 		v.URL = func(to string) string { return encodePath(relative(p.Output, to)) }
 		if boolValue(p.Meta.TOC, c.TOC) {
@@ -697,6 +726,13 @@ func plainText(p *Page) string {
 				b.WriteByte(' ')
 			}
 			return ast.WalkContinue, nil
+		}
+		if src, ok := render.MathSource(n); ok {
+			// A formula keeps its TeX source, so that a search for its symbols finds the page.
+			b.WriteByte(' ')
+			b.Write(src)
+			b.WriteByte(' ')
+			return ast.WalkSkipChildren, nil
 		}
 		switch t := n.(type) {
 		case *ast.Text:

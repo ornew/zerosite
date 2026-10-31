@@ -101,6 +101,9 @@ the array has priority; navigation ordering remains unchanged.
 - `rawHTML` allows raw HTML and defaults to false.
 - `alerts` enables alert block syntax and defaults to false.
 - `headingLinks` adds links to headings and defaults to false.
+- `math` enables formulas written as `$x$` (inline) or `$$` on its own lines, or as a `math` fence (display). KaTeX
+  renders them in the browser, and only pages that contain a formula load it. It defaults to false, so a dollar sign
+  stays text unless the option is on. See the [math specification](../../spec/markdown-math.md).
 - `headingIDs` is `unicode` (default), `github`, or `goldmark`.
 - `alignAttributes` controls table alignment attributes and defaults to true.
 

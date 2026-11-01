@@ -4,7 +4,7 @@
   "lang": "en",
   "repository": "https://github.com/ornew/zerosite",
   "branch": "main",
-  "siteURL": "",
+  "siteURL": "https://zerosite.ornew.dev",
   "basePath": "/",
   "include": [
     "README.md",

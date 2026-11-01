@@ -51,9 +51,12 @@ source-checkout override.
 
 The repository config excludes authoring templates and underscore-prefixed
 drafts. Front matter can set page title, navigation label, section, weight,
-permalink, aliases, publication, draft, search and TOC behavior. `siteURL` is
-left blank until the canonical origin is known; `basePath` separately configures
-subpath hosting. Local builds do not verify DNS, remote URLs or deployment.
+permalink, aliases, publication, draft, search, `noIndex` and TOC behavior.
+`siteURL` is the production origin `https://zerosite.ornew.dev`, so every build,
+including Netlify deploy previews, states that origin in canonical URLs, the
+sitemap and `robots.txt`. `netlify.toml` redirects the Netlify subdomain and the
+former `nanosite.ornew.net` host there. `basePath` separately configures subpath
+hosting. Local builds do not verify DNS, remote URLs or deployment.
 
 For content and theme changes, inspect navigation and search on desktop and
 mobile, check light/dark/system colors, and confirm local links and fragments.

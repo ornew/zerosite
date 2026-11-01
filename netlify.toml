@@ -6,25 +6,13 @@
   GO_VERSION = "1.27.1"
 
 [[redirects]]
-  from = "https://nanosite-go.netlify.app/*"
+  from = "https://zerosite-go.netlify.app/*"
   to = "https://zerosite.ornew.dev/:splat"
   status = 301
   force = true
 
 [[redirects]]
-  from = "http://nanosite-go.netlify.app/*"
-  to = "https://zerosite.ornew.dev/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://nanosite.ornew.net/*"
-  to = "https://zerosite.ornew.dev/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://nanosite.ornew.net/*"
+  from = "http://zerosite-go.netlify.app/*"
   to = "https://zerosite.ornew.dev/:splat"
   status = 301
   force = true

@@ -40,6 +40,7 @@ type Config struct {
 	Repository       string              `json:"repository"`
 	Branch           string              `json:"branch"`
 	SiteURL          string              `json:"siteURL"`
+	Sitemap          SitemapConfig       `json:"sitemap"`
 	BasePath         string              `json:"basePath"`
 	Include          []string            `json:"include"`
 	Exclude          []string            `json:"exclude"`
@@ -84,6 +85,12 @@ type RecordIndexConfig struct {
 	Required        []string        `json:"required"`
 	Template        string          `json:"template"`
 	TemplateText    string          `json:"templateText"`
+}
+
+type SitemapConfig struct {
+	// Lastmod selects the source of sitemap <lastmod> dates: "" omits them and
+	// "git" uses the latest commit that changed each page's source file.
+	Lastmod string `json:"lastmod"`
 }
 
 type SearchIndexConfig struct {

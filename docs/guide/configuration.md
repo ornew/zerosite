@@ -79,6 +79,18 @@ search results. The page gets `noindex` robots metadata and is left out of the
 sitemap, but it stays in navigation and the local search index; use `nav` and
 `search` to hide it there. Draft previews are always `noindex`.
 
+Set `"sitemap": {"lastmod": "git"}` to give each sitemap entry a `<lastmod>`
+date: the committer date of the latest commit that changed the page's source
+file. A merge counts as the commits it brings in, not as a change of its own.
+Commits listed in the repository's `.git-blame-ignore-revs` (the file
+`git blame --ignore-revs-file` reads: one full commit name per line, `#`
+comments) are skipped, so a bulk rename or reformat does not mark every page as
+changed; if only listed commits changed a file, the latest of them is used.
+Generated pages and uncommitted files get no date, and uncommitted edits to
+committed files do not change it. The build fails without `siteURL`, outside a
+Git repository, in a shallow clone, or on a malformed ignore-revs line, so a
+deployment must fetch full history.
+
 Markdown links resolve from the source file's directory even when the target has
 a custom permalink. Local pages, assets and heading fragments must resolve.
 External URLs are preserved, but ZeroSite does not check their availability.

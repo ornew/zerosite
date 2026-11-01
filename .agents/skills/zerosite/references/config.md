@@ -8,7 +8,7 @@
 - Paths: `-repo` is the input root; `-config`/`-out` are relative to the working directory. Configured source paths are repository-relative.
 - Flags: `-check` validates without writes; `-drafts` includes drafts; `-base-path` overrides deployment prefix; `-serve` builds once, then previews.
 - Identity: `title`, `description`, `lang`; optional `repository`, `branch` for source links.
-- Deployment: `siteURL` is the HTTP(S) origin, `basePath` the separate prefix. An origin enables canonical and `og:url` URLs, sitemap and robots output.
+- Deployment: `siteURL` is the HTTP(S) origin, `basePath` the separate prefix. An origin enables canonical and `og:url` URLs, sitemap and robots output. `sitemap.lastmod: "git"` adds last-commit dates per source file, skipping commits in `.git-blame-ignore-revs` (full SHAs); it needs `siteURL` and full history, and fails in shallow clones.
 - Publication: `include` selects Markdown, `exclude` wins over includes/assets, `drafts` defaults false. Globs: `*`, `?`, character classes, whole-segment `**`; no braces/negation.
 - Routes: `prettyURLs` selects `topic/index.html` or `topic.html`; README/index become directory indexes. Collisions fail.
 - Navigation: ordered `sections` have globally unique `title`, `match`, optional `collapsed`, `index`, `first`, and nested `children`. Child matches are checked before parent matches. `index` names the README source for ordering; `first` lists sources to prioritize among equal-weight pages.

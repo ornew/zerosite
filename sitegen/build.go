@@ -127,6 +127,12 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 	if err := validateOutputWith(repo, out, extension); err != nil {
 		return nil, err
 	}
+	if c.Sitemap.Lastmod != "" && c.Sitemap.Lastmod != "git" {
+		return nil, fmt.Errorf("sitemap.lastmod must be empty or git")
+	}
+	if c.Sitemap.Lastmod != "" && c.SiteURL == "" {
+		return nil, fmt.Errorf("sitemap.lastmod requires siteURL")
+	}
 	md := markdownWith(c.Markdown)
 	var pages []*Page
 	selectedSources := map[string]bool{}
@@ -589,12 +595,29 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 	}
 	if c.SiteURL != "" {
 		var b strings.Builder
+		lastmod := map[string]string{}
+		if c.Sitemap.Lastmod == "git" {
+			var sources []string
+			for _, p := range pages {
+				// Generated pages have no repository file whose history applies.
+				if info, e := os.Stat(filepath.Join(repo, filepath.FromSlash(p.Source))); !noIndex(p) && !p.NoSource && e == nil && info.Mode().IsRegular() {
+					sources = append(sources, p.Source)
+				}
+			}
+			if lastmod, err = gitLastModified(repo, sources); err != nil {
+				return nil, err
+			}
+		}
 		b.WriteString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n")
 		for _, p := range pages {
 			if noIndex(p) {
 				continue
 			}
-			fmt.Fprintf(&b, "<url><loc>%s</loc></url>\n", html.EscapeString(strings.TrimSuffix(c.SiteURL, "/")+publicURL(c, p.Output)))
+			fmt.Fprintf(&b, "<url><loc>%s</loc>", html.EscapeString(strings.TrimSuffix(c.SiteURL, "/")+publicURL(c, p.Output)))
+			if d := lastmod[p.Source]; d != "" && !p.NoSource {
+				fmt.Fprintf(&b, "<lastmod>%s</lastmod>", d)
+			}
+			b.WriteString("</url>\n")
 		}
 		b.WriteString("</urlset>\n")
 		if err := reserve("sitemap.xml", []byte(b.String())); err != nil {

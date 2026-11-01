@@ -47,6 +47,7 @@ Start from `site/config.json`. Unknown keys fail the build to catch typos.
 | `title`, `description`, `lang` | Site identity, fallback page description, HTML language |
 | `repository`, `branch` | Optional repository URL and branch for source links; blank disables them |
 | `siteURL` | Optional HTTP(S) origin such as `https://docs.example.com`; enables canonical and Open Graph page URLs, sitemap and robots file |
+| `sitemap.lastmod` | `git` adds sitemap `<lastmod>` dates from commit history; default empty omits them |
 | `basePath` | Deployment prefix, default `/`; use `/project/` for subpath hosting |
 | `include` | Repository-relative Markdown globs |
 | `exclude` | Globs excluded from pages and copied assets; wins over include |

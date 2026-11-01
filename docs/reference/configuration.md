@@ -54,6 +54,7 @@ generator pin together at that revision.
 | `repository` | string | empty | Optional repository URL for source links |
 | `branch` | string | `main` | Branch used in generated source links |
 | `siteURL` | string | empty | Optional HTTP(S) origin only; enables canonical and Open Graph page URLs, sitemap and robots output |
+| `sitemap.lastmod` | string | empty | `git` adds each page's last commit date to the sitemap; requires `siteURL` and full Git history |
 | `basePath` | string | `/` | Deployment URL prefix, independent of `siteURL`; must be an absolute path without traversal, query, fragment or backslash |
 
 ## Publication and routes

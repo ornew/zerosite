@@ -2,7 +2,7 @@ package render
 
 import (
 	"encoding/json"
-	"github.com/ornew/nanosite/publish"
+	"github.com/ornew/zerosite/publish"
 )
 
 // WriteIndex lets a theme select its search schema and script prefix while

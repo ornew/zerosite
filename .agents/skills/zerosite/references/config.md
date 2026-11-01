@@ -1,7 +1,7 @@
-# Nanosite Configuration
+# Zerosite Configuration
 
-- Read `site/build.sh`, `site/config.json` and `site/nanosite.rev` first. The CLI and `sitegen.BuildWith` share the standard config and pipeline; lower-level custom drivers may define different contracts.
-- `site/nanosite.rev` pins the generator and installed skill to the same commit. The selected command embeds its own skill; run `nanosite skill -out .agents/skills/nanosite` through `hack/update-nanosite-skill.sh`. Do not copy a newer skill independently.
+- Read `site/build.sh`, `site/config.json` and `site/zerosite.rev` first. The CLI and `sitegen.BuildWith` share the standard config and pipeline; lower-level custom drivers may define different contracts.
+- `site/zerosite.rev` pins the generator and installed skill to the same commit. The selected command embeds its own skill; run `zerosite skill -out .agents/skills/zerosite` through `hack/update-zerosite-skill.sh`. Do not copy a newer skill independently.
 
 ## Standard CLI
 
@@ -34,6 +34,6 @@
 - `tocDepth` defaults to 4 and accepts 2–6. It controls TOC and search heading depth. `order` lists source paths to prioritize at equal weights, before README ordering.
 - `directoryLinks` defaults false and uses trailing-slash index URLs when enabled. `repositoryLinks` defaults false and turns unresolved source links into repository file/directory links when `repository` is configured; these links take precedence over an incidental published route with the same filename.
 - `bundledAssets` and `redirectRules` default true. The former copies built-in CSS/JS/theme files, and math assets are published whenever `markdown.math` is true regardless of it; the latter emits Netlify `_redirects`. `redirectTemplate` optionally supplies a Go template receiving `.Config`, `.Href`, and `.Lang`.
-- `templates` loads named partial templates into the layout selected by `template`. `searchIndex` fields: `path` (default `assets/search-index.js`), `variable` (default `globalThis.NANOSITE_SEARCH`, or raw JSON when path ends `.json`), `fields` (mapping of `title`, `url`, `text`, `section`, `headings` to output keys), `text` (`markdown`/`html`), `headingTitle` (`context`/`heading`), `headingText` (`heading`/`page`), and `section` (`leaf`/`group`).
+- `templates` loads named partial templates into the layout selected by `template`. `searchIndex` fields: `path` (default `assets/search-index.js`), `variable` (default `globalThis.ZEROSITE_SEARCH`, or raw JSON when path ends `.json`), `fields` (mapping of `title`, `url`, `text`, `section`, `headings` to output keys), `text` (`markdown`/`html`), `headingTitle` (`context`/`heading`), `headingText` (`heading`/`page`), and `section` (`leaf`/`group`).
 - The `sitegen` Go package exposes `ReadConfig`, `DefaultConfig`, and `BuildWith`. `BuildWith` accepts `Extensions` hooks: `Prepare`, `Decorate`, `View`, `TemplateFuncs`, `Validate`, plus marker and output policy fields. `Context` exposes selected pages/config/Markdown, generated assets, `AddHTMLPage`, and `Render`; generated HTML is used verbatim and supplied headings are needed for heading search. `Validate` runs on staged output in normal and check builds. `HTMLText` extracts plain text. See `docs/guide/extensions.md` for the API example.
 - Keep standard publication, link validation, and output ownership in the builder. Use lower-level `render`/`publish` packages only when a custom pipeline is needed. Build the actual site and distinguish local output from deployment evidence.

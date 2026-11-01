@@ -9,7 +9,7 @@
     choice = choices[(choices.indexOf(choice) + 1) % choices.length];
     if (choice === 'system') delete document.documentElement.dataset.theme;
     else document.documentElement.dataset.theme = choice;
-    try { localStorage.setItem('nanosite-theme', choice); } catch {}
+    try { localStorage.setItem('zerosite-theme', choice); } catch {}
     update();
   });
   }
@@ -31,7 +31,7 @@
     const terms = input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
     results.replaceChildren(); results.hidden = !terms.length;
     if (!terms.length) return;
-    const hits = (globalThis.NANOSITE_SEARCH || []).filter(p => terms.every(t => `${p.title} ${p.text}`.toLocaleLowerCase().includes(t)))
+    const hits = (globalThis.ZEROSITE_SEARCH || []).filter(p => terms.every(t => `${p.title} ${p.text}`.toLocaleLowerCase().includes(t)))
       .sort((a, b) => Number(terms.every(t => b.title.toLocaleLowerCase().includes(t))) - Number(terms.every(t => a.title.toLocaleLowerCase().includes(t))));
     const note = document.createElement('p'); note.textContent = hits.length ? `${hits.length} result${hits.length === 1 ? '' : 's'}` : 'No matching pages'; results.append(note);
     const list = document.createElement('ul');

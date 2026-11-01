@@ -1,4 +1,4 @@
-// Command nanosite builds static documentation from an arbitrary repository.
+// Command zerosite builds static documentation from an arbitrary repository.
 package main
 
 import (
@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ornew/nanosite/sitegen"
+	"github.com/ornew/zerosite/sitegen"
 )
 
 func main() {

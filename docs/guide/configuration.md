@@ -1,6 +1,6 @@
 # Configure a site
 
-Nanosite takes a repository of Markdown and assets plus a JSON configuration.
+Zerosite takes a repository of Markdown and assets plus a JSON configuration.
 Start with `site/config.json`. Paths in configuration are relative to the
 repository unless an option says otherwise. Unknown keys and invalid types fail
 the build.
@@ -68,7 +68,7 @@ provides the canonical URL origin and enables a sitemap and robots file;
 
 Markdown links resolve from the source file's directory even when the target has
 a custom permalink. Local pages, assets and heading fragments must resolve.
-External URLs are preserved, but Nanosite does not check their availability.
+External URLs are preserved, but Zerosite does not check their availability.
 Add image and download paths to `assets`; exclusions apply to them too. The
 optional `staticDir` copies a public directory to the output root, keeping its
 relative file paths.
@@ -126,7 +126,7 @@ variable, entry properties and text/section format. See the
 ## Add CSS, scripts, or a template
 
 Use `styles` and `scripts` for output-relative local assets. They load after
-Nanosite's built-in stylesheet and scripts, so a CSS override can reuse its
+Zerosite's built-in stylesheet and scripts, so a CSS override can reuse its
 color variables and theme modes. `staticDir` is convenient for a small asset
 directory. See the [custom-theme recipe](../cookbook/custom-theme.md) for a
 complete example. Setting `template` replaces the entire HTML layout; its Go

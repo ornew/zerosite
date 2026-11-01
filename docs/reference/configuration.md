@@ -1,6 +1,6 @@
 # Configuration and command-line reference
 
-The standard Nanosite command reads one JSON object. Unknown keys, invalid
+The standard Zerosite command reads one JSON object. Unknown keys, invalid
 types and trailing JSON values fail configuration loading. Duplicate JSON keys
 are accepted by Go's decoder; avoid them because later values can obscure the
 intended setting. The command's `-config` and `-out` paths are resolved from its working
@@ -26,22 +26,22 @@ The `skill` and `version` subcommands are separate commands, not build flags.
 
 | Command | Default | Meaning |
 |:--|:--|:--|
-| `nanosite version` | — | Print the selected binary's module version, VCS revision (with `+dirty` when applicable), or `(devel)` |
-| `nanosite skill` | `-out .agents/skills/nanosite` | Export the skill embedded in this exact Nanosite build |
-| `nanosite skill -out PATH` | — | Export to a dedicated skill directory at `PATH` |
+| `zerosite version` | — | Print the selected binary's module version, VCS revision (with `+dirty` when applicable), or `(devel)` |
+| `zerosite skill` | `-out .agents/skills/zerosite` | Export the skill embedded in this exact Zerosite build |
+| `zerosite skill -out PATH` | — | Export to a dedicated skill directory at `PATH` |
 
 For example, export the skill and inspect the matching generator version:
 
 ```sh
-go run github.com/ornew/nanosite@FULL_COMMIT_SHA skill -out .agents/skills/nanosite
-go run github.com/ornew/nanosite@FULL_COMMIT_SHA version
+go run github.com/ornew/zerosite@FULL_COMMIT_SHA skill -out .agents/skills/zerosite
+go run github.com/ornew/zerosite@FULL_COMMIT_SHA version
 ```
 
 Replace `FULL_COMMIT_SHA` with the revision used to build the site. The export
-includes `.nanosite-skill` and `.nanosite-version` metadata. The destination
+includes `.zerosite-skill` and `.zerosite-version` metadata. The destination
 must be a dedicated skill directory; unrelated files and symlink destinations
-are rejected. The source of the embedded skill is the `.agents/skills/nanosite/`
-directory in the selected Nanosite revision. Keep the exported skill and
+are rejected. The source of the embedded skill is the `.agents/skills/zerosite/`
+directory in the selected Zerosite revision. Keep the exported skill and
 generator pin together at that revision.
 
 ## Site identity and deployment
@@ -140,7 +140,7 @@ first.
 | Field | JSON type | Default | Meaning |
 |:--|:--|:--|:--|
 | `path` | string | `assets/search-index.js` | Output-relative path for search data |
-| `variable` | string | `globalThis.NANOSITE_SEARCH` | Dotted JavaScript identifier assigned the data; when omitted and `path` ends in `.json`, output raw JSON |
+| `variable` | string | `globalThis.ZEROSITE_SEARCH` | Dotted JavaScript identifier assigned the data; when omitted and `path` ends in `.json`, output raw JSON |
 | `fields` | object of strings | `title`, `url`, `text` | Map supported entry fields to output property names |
 | `text` | string | `markdown` | `markdown` source text or `html` rendered text |
 | `headingTitle` | string | `context` | `context` uses “page › heading”; `heading` uses only the heading |
@@ -250,5 +250,5 @@ markup for features it wants to retain.
 Markdown links resolve relative to the source path, even for a custom permalink.
 Local targets and fragments must exist and be published; external links are not
 checked for availability. Generated output must be new, empty, or contain the
-Nanosite ownership marker. Failed builds preserve prior output; successful
+Zerosite ownership marker. Failed builds preserve prior output; successful
 builds replace it after validation.

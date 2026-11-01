@@ -152,7 +152,7 @@ func TestMathSearchText(t *testing.T) {
 		put(t, repo, "README.md", "# Home\n")
 		put(t, repo, "docs/search.md", "# The $HeadTok_1$ rule\n\nBody $\\alpha+\\beta$ here.\n\n$$\n\\sum_i s_i\n$$\n")
 		run(t, repo, out, c)
-		raw := strings.TrimSuffix(strings.TrimPrefix(read(t, out, "assets/search-index.js"), "globalThis.NANOSITE_SEARCH = "), ";\n")
+		raw := strings.TrimSuffix(strings.TrimPrefix(read(t, out, "assets/search-index.js"), "globalThis.ZEROSITE_SEARCH = "), ";\n")
 		var entries []map[string]any
 		if err := json.Unmarshal([]byte(raw), &entries); err != nil {
 			t.Fatal(err)

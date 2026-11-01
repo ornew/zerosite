@@ -1,6 +1,6 @@
-# Nanosite
+# Zerosite
 
-Nanosite is an independent Go command that renders repository Markdown into a static site.
+Zerosite is an independent Go command that renders repository Markdown into a static site.
 It has no dependency on the project's implementation, its root module, or a
 neighboring checkout. Repository-specific policy lives in a JSON configuration.
 
@@ -12,7 +12,7 @@ neighboring checkout. Repository-specific policy lives in a JSON configuration.
 
 ## Build and preview
 
-Requires Go 1.27.1 or later. From the Nanosite repository root:
+Requires Go 1.27.1 or later. From the Zerosite repository root:
 
 ```sh
 sh site/build.sh
@@ -29,8 +29,8 @@ Generated pages can also be opened through `file://`.
 The reusable command can build an unrelated repository:
 
 ```sh
-go build -o /tmp/nanosite .
-/tmp/nanosite -repo /path/to/project -config /path/to/site.json -out /tmp/project-site
+go build -o /tmp/zerosite .
+/tmp/zerosite -repo /path/to/project -config /path/to/site.json -out /tmp/project-site
 ```
 
 `-config` and `-out` are resolved against the command's working directory.
@@ -258,7 +258,7 @@ Input documents are read only. All output is planned, checked and rendered befor
 replacement. A failed build preserves the previous usable output; a successful
 rebuild removes stale pages and assets.
 
-The output directory must be new, empty, or contain the exact `.nanosite`
+The output directory must be new, empty, or contain the exact `.zerosite`
 marker written by this generator. The generator rejects unrelated nonempty output,
 repository roots/ancestors and symlinked output paths. Do not keep handwritten
 files in generated output. Changes should be serialized against a given output
@@ -274,11 +274,11 @@ content in `.Body`; do not treat metadata as trusted HTML. Custom templates and
 public assets are trusted project code.
 
 The Go command, module, tests, embedded `layout.html` and `static/` live at the
-repository root. `site/config.json` configures Nanosite's own documentation site;
+repository root. `site/config.json` configures Zerosite's own documentation site;
 `site/build.sh` builds it using the root command. The compiled binary embeds its
 fallback assets and runs independently of this checkout.
 
-Nanosite began as the site tooling of `ornew/template-basic` and uses that OSS
+Zerosite began as the site tooling of `ornew/template-basic` and uses that OSS
 documentation template itself. Adopting projects can pin a published commit
 without waiting for a tagged release.
 
@@ -287,16 +287,16 @@ without waiting for a tagged release.
 Use the same revision for generation and the accompanying agent skill:
 
 ```sh
-go run github.com/ornew/nanosite@FULL_COMMIT_SHA -repo . -config site/config.json -out site/dist
-go run github.com/ornew/nanosite@FULL_COMMIT_SHA skill -out .agents/skills/nanosite
-go run github.com/ornew/nanosite@FULL_COMMIT_SHA version
+go run github.com/ornew/zerosite@FULL_COMMIT_SHA -repo . -config site/config.json -out site/dist
+go run github.com/ornew/zerosite@FULL_COMMIT_SHA skill -out .agents/skills/zerosite
+go run github.com/ornew/zerosite@FULL_COMMIT_SHA version
 ```
 
 The command embeds `SKILL.md` and its configuration reference. `skill` installs
 only that version's files; it refuses unrelated files and symlink destinations.
-The default destination is `.agents/skills/nanosite`. The installed
-`.nanosite-version` records the module version. Commit installed skill files with
-the generator pin. The template's `hack/update-nanosite-skill.sh` synchronizes
+The default destination is `.agents/skills/zerosite`. The installed
+`.zerosite-version` records the module version. Commit installed skill files with
+the generator pin. The template's `hack/update-zerosite-skill.sh` synchronizes
 both and also updates the dependency of Go extension drivers.
 
 ## Go extension drivers

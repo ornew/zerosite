@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ornew/nanosite/render"
+	"github.com/ornew/zerosite/render"
 	"github.com/yuin/goldmark/ast"
 	"github.com/yuin/goldmark/text"
 	"gopkg.in/yaml.v3"

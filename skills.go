@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-//go:embed all:.agents/skills/nanosite
+//go:embed all:.agents/skills/zerosite
 var skillFiles embed.FS
 
 func version() string {
@@ -40,8 +40,8 @@ func version() string {
 }
 
 func skillCommand(args []string) error {
-	flags := flag.NewFlagSet("nanosite skill", flag.ContinueOnError)
-	out := flags.String("out", ".agents/skills/nanosite", "destination skill directory")
+	flags := flag.NewFlagSet("zerosite skill", flag.ContinueOnError)
+	out := flags.String("out", ".agents/skills/zerosite", "destination skill directory")
 	if err := flags.Parse(args); err != nil {
 		return err
 	}
@@ -51,7 +51,7 @@ func skillCommand(args []string) error {
 	if err := writeSkill(*out); err != nil {
 		return err
 	}
-	fmt.Printf("installed Nanosite skill (%s) in %s\n", version(), *out)
+	fmt.Printf("installed Zerosite skill (%s) in %s\n", version(), *out)
 	return nil
 }
 
@@ -80,10 +80,10 @@ func writeSkill(out string) error {
 	if out == cwd || out == filepath.Dir(out) {
 		return fmt.Errorf("choose a dedicated skill directory")
 	}
-	allowed := map[string]bool{".nanosite-skill": true, ".nanosite-version": true, ".revision": true}
+	allowed := map[string]bool{".zerosite-skill": true, ".zerosite-version": true, ".revision": true}
 	dirs := map[string]bool{".": true}
 	files := map[string][]byte{}
-	const base = ".agents/skills/nanosite"
+	const base = ".agents/skills/zerosite"
 	err = fs.WalkDir(skillFiles, base, func(name string, d fs.DirEntry, e error) error {
 		if e != nil {
 			return e
@@ -142,13 +142,13 @@ func writeSkill(out string) error {
 	if err := os.MkdirAll(filepath.Dir(out), 0755); err != nil {
 		return err
 	}
-	stage, err := os.MkdirTemp(filepath.Dir(out), ".nanosite-skill-")
+	stage, err := os.MkdirTemp(filepath.Dir(out), ".zerosite-skill-")
 	if err != nil {
 		return err
 	}
 	defer os.RemoveAll(stage)
-	files[".nanosite-skill"] = []byte("Nanosite embedded skill v1\n")
-	files[".nanosite-version"] = []byte(version() + "\n")
+	files[".zerosite-skill"] = []byte("Zerosite embedded skill v1\n")
+	files[".zerosite-version"] = []byte(version() + "\n")
 	for name, data := range files {
 		p := filepath.Join(stage, filepath.FromSlash(name))
 		if err := os.MkdirAll(filepath.Dir(p), 0755); err != nil {

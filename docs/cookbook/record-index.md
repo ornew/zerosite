@@ -1,7 +1,7 @@
 # Generate an index of numbered records
 
 Use `recordIndexes` to build a Markdown table from numbered files in a
-directory. Nanosite generates the configured source in memory, so you do not
+directory. Zerosite generates the configured source in memory, so you do not
 need to maintain a duplicate index file. Existing source Markdown is never
 rewritten.
 
@@ -39,7 +39,7 @@ the build.
 
 Add this object to the site's configuration. The source path must match an
 `include` pattern and not match `exclude`. This example assumes there is no
-physical `docs/decisions/README.md`; Nanosite supplies that virtual Markdown
+physical `docs/decisions/README.md`; Zerosite supplies that virtual Markdown
 page and routes it as the directory index.
 
 ```json
@@ -88,7 +88,7 @@ source paths and still lead to the published routes.
 
 To place the index first among equal-weight pages in its navigation group, set
 that group's `index` field to the same virtual source path. Validate the
-configuration with `nanosite -check` (or the equivalent `go run` command in the
+configuration with `zerosite -check` (or the equivalent `go run` command in the
 [first-site tutorial](../tutorial/first-site.md)) before building the site.
 
 The generated Markdown table contains the two records in numeric order:

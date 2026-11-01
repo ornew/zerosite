@@ -1,7 +1,7 @@
 # AGENTS.md
 
-Nanosite is the Go documentation site generator. Its root module is
-`github.com/ornew/nanosite`; `site/` configures its own documentation site.
+Zerosite is the Go documentation site generator. Its root module is
+`github.com/ornew/zerosite`; `site/` configures its own documentation site.
 
 User instructions for the current task take precedence over these defaults.
 
@@ -11,14 +11,14 @@ User instructions for the current task take precedence over these defaults.
 - `spec/`: normative public contracts; `docs/design/`: decisions and rationale.
 - `docs/tutorial/`, `docs/guide/`, `docs/cookbook/`: learning, features, recipes.
 - `docs/optimizations/`: mechanisms, applicability and reproducible measurements.
-- `docs/dev/`: repository operations; `site/`: Nanosite configuration and wrapper.
+- `docs/dev/`: repository operations; `site/`: Zerosite configuration and wrapper.
 
 Keep detailed contracts, status and evidence in docs. Use skills when relevant:
 
 - `documentation`: authoring docs and design/spec changes.
 - `performance`: optimization and benchmark evidence.
 - `backlog`: maintaining an explicitly selected backlog.
-- `nanosite`: site publication and configuration.
+- `zerosite`: site publication and configuration.
 
 ## Working conventions
 
@@ -51,6 +51,6 @@ For site or Markdown changes, run `sh site/build.sh -check` and `sh site/build.s
 Run `gofmt` on changed Go files, then `go test ./...` and `go vet ./...`.
 `main.go` implements the CLI; `sitegen/` owns standard config, Markdown and the
 shared build pipeline, while `render/` and `publish/` provide supporting APIs.
-`sitegen/layout.html`, `sitegen/static/` and the Nanosite skill are embedded.
+`sitegen/layout.html`, `sitegen/static/` and the Zerosite skill are embedded.
 The CLI and `sitegen.BuildWith` share standard config and publication behavior.
 Keep exported skill/config guidance aligned with behavior.

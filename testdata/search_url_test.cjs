@@ -15,7 +15,7 @@ const context = {
  },
  matchMedia: () => ({ matches: false, addEventListener() {} }),
  localStorage: { setItem() {} }, URL,
- NANOSITE_SEARCH: [{title: 'Unicode', text: 'Unicode', url: 'docs/name%20%23%25/index.html#%E6%97%A5%E6%9C%AC%E8%AA%9E'}]
+ ZEROSITE_SEARCH: [{title: 'Unicode', text: 'Unicode', url: 'docs/name%20%23%25/index.html#%E6%97%A5%E6%9C%AC%E8%AA%9E'}]
 };
 vm.runInNewContext(fs.readFileSync(process.argv[2], 'utf8'), context);
 input.value = 'Unicode'; inputListener();
@@ -30,6 +30,6 @@ vm.runInNewContext(fs.readFileSync(process.argv[2], 'utf8'), context);
 inputListener();
 assert.equal(results.children[1].children[0].children[0].href, link.href);
 
-context.NANOSITE_SEARCH[0].url = 'javascript:example/index.html#heading';
+context.ZEROSITE_SEARCH[0].url = 'javascript:example/index.html#heading';
 inputListener();
 assert.equal(results.children[1].children[0].children[0].href, 'https://example.com/project/javascript:example/index.html#heading');

@@ -65,7 +65,7 @@ func Discover(repo string, include, exclude []string) ([]string, error) {
 			return err
 		}
 		if d.IsDir() {
-			if d.Name() == ".git" || d.Name() == ".claude" || d.Name() == ".agents" || strings.HasPrefix(d.Name(), ".nanosite-build-") {
+			if d.Name() == ".git" || d.Name() == ".claude" || d.Name() == ".agents" || strings.HasPrefix(d.Name(), ".zerosite-build-") {
 				return filepath.SkipDir
 			}
 			return nil

@@ -14,16 +14,16 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ornew/nanosite/publish"
-	"github.com/ornew/nanosite/render"
+	"github.com/ornew/zerosite/publish"
+	"github.com/ornew/zerosite/render"
 	"github.com/yuin/goldmark/ast"
 )
 
 //go:embed layout.html static/*
 var embedded embed.FS
 
-const marker = ".nanosite"
-const markerContent = "nanosite v1\n"
+const marker = ".zerosite"
+const markerContent = "zerosite v1\n"
 
 // The math assets: the loader script, and the stylesheets that a page with a formula also links.
 const mathScript = "assets/math/math.js"
@@ -604,7 +604,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 	result := &Result{pages, out}
 	if check {
 		if extension.Validate != nil {
-			stage, err := os.MkdirTemp("", "nanosite-check-")
+			stage, err := os.MkdirTemp("", "zerosite-check-")
 			if err != nil {
 				return nil, err
 			}

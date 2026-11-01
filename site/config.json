@@ -1,8 +1,8 @@
 {
-  "title": "Nanosite",
+  "title": "Zerosite",
   "description": "Small, configurable documentation sites from repository Markdown.",
   "lang": "en",
-  "repository": "https://github.com/ornew/nanosite",
+  "repository": "https://github.com/ornew/zerosite",
   "branch": "main",
   "siteURL": "",
   "basePath": "/",

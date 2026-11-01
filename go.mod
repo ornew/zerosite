@@ -1,4 +1,4 @@
-module github.com/ornew/nanosite
+module github.com/ornew/zerosite
 
 go 1.27.1
 

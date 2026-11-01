@@ -8,12 +8,12 @@ import (
 
 func TestEmbeddedSkillInstallation(t *testing.T) {
 	root := t.TempDir()
-	out := filepath.Join(root, "skills/nanosite")
+	out := filepath.Join(root, "skills/zerosite")
 	if err := writeSkill(out); err != nil {
 		t.Fatal(err)
 	}
 	for _, name := range []string{"SKILL.md", "references/config.md"} {
-		want, err := skillFiles.ReadFile(".agents/skills/nanosite/" + name)
+		want, err := skillFiles.ReadFile(".agents/skills/zerosite/" + name)
 		if err != nil {
 			t.Fatal(err)
 		}

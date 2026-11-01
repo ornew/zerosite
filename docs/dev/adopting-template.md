@@ -1,18 +1,18 @@
-# Maintain the Nanosite repository template
+# Maintain the Zerosite repository template
 
-Nanosite's documentation conventions and site tooling originated in an OSS
+Zerosite's documentation conventions and site tooling originated in an OSS
 project template. Maintain the template as a reviewed set of reusable files;
-keep Nanosite's own generator implementation and site behavior authoritative.
+keep Zerosite's own generator implementation and site behavior authoritative.
 
 ## Preserve project ownership
 
-The root Go module owns the `nanosite` command and its `render` and `publish`
+The root Go module owns the `zerosite` command and its `render` and `publish`
 packages. The repository's `site/config.json` and `site/build.sh` configure and
 build this checkout's site from the root module. Preserve this source ownership
 when preparing files for reuse; consumer instructions should pin a specific
-Nanosite revision rather than depend on a neighboring checkout.
+Zerosite revision rather than depend on a neighboring checkout.
 
-Keep Nanosite-specific contracts and links in its README, specification, guides,
+Keep Zerosite-specific contracts and links in its README, specification, guides,
 and development docs. Reusable template files should avoid inventing a consumer's
 license, package name, support policy, installation command, or product claims.
 Use clearly marked authoring prompts only where the adopter must supply a real

@@ -1,6 +1,6 @@
 # Development
 
-Nanosite is a Go documentation generator. Its command and reusable `sitegen`,
+Zerosite is a Go documentation generator. Its command and reusable `sitegen`,
 `render`, and `publish` packages live in one Go module at the repository root. The `site/`
 directory configures the documentation site for this source checkout; it is not
 a separate Go module.
@@ -14,7 +14,7 @@ a separate Go module.
 | `render/` | Routing, navigation and record-index APIs |
 | `publish/` | Safe output staging and replacement |
 | `sitegen/layout.html`, `sitegen/static/` | Embedded default site layout and browser assets |
-| `.agents/skills/nanosite/` | Skill source embedded in the command by `skills.go` |
+| `.agents/skills/zerosite/` | Skill source embedded in the command by `skills.go` |
 | `site/config.json`, `site/build.sh` | Configuration and wrapper for this checkout's own site |
 | `docs/` | Tutorials, guides, recipes, reference, design and development docs |
 
@@ -38,7 +38,7 @@ evidence of a deployed site.
 
 Write user instructions in tutorials, guides, recipes and reference pages.
 Keep development setup here and site-maintenance details in [site maintenance](site.md).
-The Nanosite skill source is `.agents/skills/nanosite/`; the build embeds that
+The Zerosite skill source is `.agents/skills/zerosite/`; the build embeds that
 directory into the CLI. Keep its configuration reference aligned with the
 standard CLI and `sitegen.BuildWith`, which share the same config and publication
 pipeline.

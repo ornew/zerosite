@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ornew/nanosite/render"
+	"github.com/ornew/zerosite/render"
 )
 
 // All repository-specific choices live in Config. The generator can be moved

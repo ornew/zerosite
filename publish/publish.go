@@ -1,5 +1,5 @@
 // Package publish plans and atomically publishes documentation output produced
-// by Nanosite or a project extension driver. Source and theme policy stay with
+// by Zerosite or a project extension driver. Source and theme policy stay with
 // the caller; ownership, staging and failure recovery are shared.
 package publish
 
@@ -111,7 +111,7 @@ func Run(o Options, generate func(stage string) error) error {
 	if err := os.MkdirAll(filepath.Dir(out), 0755); err != nil {
 		return err
 	}
-	stage, err := os.MkdirTemp(filepath.Dir(out), ".nanosite-build-")
+	stage, err := os.MkdirTemp(filepath.Dir(out), ".zerosite-build-")
 	if err != nil {
 		return err
 	}

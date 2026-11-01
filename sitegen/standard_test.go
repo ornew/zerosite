@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ornew/nanosite/render"
+	"github.com/ornew/zerosite/render"
 )
 
 func TestStandardRecordIndexRespectsPublicationAndRoutes(t *testing.T) {

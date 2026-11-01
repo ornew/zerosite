@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ornew/nanosite/publish"
-	"github.com/ornew/nanosite/render"
+	"github.com/ornew/zerosite/publish"
+	"github.com/ornew/zerosite/render"
 )
 
 func outputOptions(repo, out string, e Extensions) publish.Options {
@@ -147,7 +147,7 @@ func searchBytes(c Config, data []byte) []byte {
 		return data
 	}
 	if variable == "" {
-		variable = "globalThis.NANOSITE_SEARCH"
+		variable = "globalThis.ZEROSITE_SEARCH"
 	}
 	return append(append([]byte(variable+" = "), data...), ';', '\n')
 }

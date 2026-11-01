@@ -1,6 +1,6 @@
 # Guides
 
-Configure how Nanosite turns Markdown and assets into a site.
+Configure how Zerosite turns Markdown and assets into a site.
 
 ## Contents
 

@@ -322,7 +322,7 @@ func TestSectionPagingAndSearchText(t *testing.T) {
 		t.Fatal("paging crossed section")
 	}
 	index := read(t, out, "assets/search-index.js")
-	raw := strings.TrimSuffix(strings.TrimPrefix(index, "globalThis.NANOSITE_SEARCH = "), ";\n")
+	raw := strings.TrimSuffix(strings.TrimPrefix(index, "globalThis.ZEROSITE_SEARCH = "), ";\n")
 	var entries []map[string]string
 	if err := json.Unmarshal([]byte(raw), &entries); err != nil {
 		t.Fatal(err)

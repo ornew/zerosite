@@ -56,7 +56,7 @@ For a complete layout change, create `site/layout.html`:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>{{.Page.Title}} · {{.Config.Title}}</title>
-  <meta name="description" content="{{.Page.Description}}">
+  {{if .Page.Description}}<meta name="description" content="{{.Page.Description}}">{{end}}
   {{if .Canonical}}<link rel="canonical" href="{{.Canonical}}">{{end}}
   {{if .NoIndex}}<meta name="robots" content="noindex">{{end}}
   <script src="{{.Theme}}"></script>

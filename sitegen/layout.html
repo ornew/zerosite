@@ -4,9 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{.Page.Title}}{{if ne .Page.Title .Config.Title}} · {{.Config.Title}}{{end}}</title>
-<meta name="description" content="{{.Page.Description}}">
+{{if .Page.Description}}<meta name="description" content="{{.Page.Description}}">{{end}}
 <meta name="color-scheme" content="light dark">
 {{if .Canonical}}<link rel="canonical" href="{{.Canonical}}">{{end}}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{.Config.Title}}">
+<meta property="og:title" content="{{.Page.Title}}">
+{{if .Page.Description}}<meta property="og:description" content="{{.Page.Description}}">{{end}}
+{{if .Canonical}}<meta property="og:url" content="{{.Canonical}}">{{end}}
+<meta name="twitter:card" content="summary">
 {{if .NoIndex}}<meta name="robots" content="noindex">{{end}}
 <script src="{{.Theme}}"></script>
 <link rel="stylesheet" href="{{.CSS}}">

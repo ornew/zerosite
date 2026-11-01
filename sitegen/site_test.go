@@ -120,6 +120,63 @@ func TestPublicationAndDefaults(t *testing.T) {
 	}
 }
 
+func TestSearchEngineMetadata(t *testing.T) {
+	repo, out, c := fixture(t)
+	c.Title = "Site"
+	c.SiteURL = "https://example.com"
+	put(t, repo, "README.md", "---\ndescription: Home summary\n---\n# Home\n")
+	put(t, repo, "docs/guide/plain.md", "# Plain\n")
+	put(t, repo, "docs/guide/hidden.md", "---\nnoIndex: true\n---\n# Hidden\n")
+	put(t, repo, "docs/guide/archive.md", "# Archive\n")
+	put(t, repo, "docs/guide/kept.md", "---\nnoIndex: false\n---\n# Kept\n")
+	yes := true
+	c.Defaults = []Defaults{{Match: []string{"docs/guide/archive.md", "docs/guide/kept.md"}, Values: Metadata{NoIndex: &yes}}}
+	run(t, repo, out, c)
+	home := read(t, out, "index.html")
+	for _, want := range []string{
+		`<meta name="description" content="Home summary">`,
+		`<meta property="og:type" content="website">`,
+		`<meta property="og:site_name" content="Site">`,
+		`<meta property="og:title" content="Home">`,
+		`<meta property="og:description" content="Home summary">`,
+		`<meta property="og:url" content="https://example.com/">`,
+		`<meta name="twitter:card" content="summary">`,
+	} {
+		if !strings.Contains(home, want) {
+			t.Fatalf("home page lacks %s", want)
+		}
+	}
+	plain := read(t, out, "docs/guide/plain/index.html")
+	if strings.Contains(plain, `name="description"`) || strings.Contains(plain, "og:description") {
+		t.Fatal("empty description emitted")
+	}
+	if !strings.Contains(plain, `<meta property="og:url" content="https://example.com/docs/guide/plain/">`) {
+		t.Fatal("page URL missing")
+	}
+	for _, name := range []string{"hidden", "archive"} {
+		if !strings.Contains(read(t, out, "docs/guide/"+name+"/index.html"), `<meta name="robots" content="noindex">`) {
+			t.Fatalf("%s page not noindex", name)
+		}
+	}
+	if strings.Contains(read(t, out, "docs/guide/kept/index.html"), `content="noindex"`) {
+		t.Fatal("front matter noIndex:false did not override defaults")
+	}
+	sitemap := read(t, out, "sitemap.xml")
+	for _, name := range []string{"hidden", "archive"} {
+		if strings.Contains(sitemap, "/docs/guide/"+name+"/") {
+			t.Fatalf("noindex page %s in sitemap", name)
+		}
+	}
+	for _, name := range []string{"plain", "kept"} {
+		if !strings.Contains(sitemap, "https://example.com/docs/guide/"+name+"/") {
+			t.Fatalf("indexed page %s missing from sitemap", name)
+		}
+	}
+	if !strings.Contains(read(t, out, "assets/search-index.js"), "Hidden") {
+		t.Fatal("noIndex changed the local search index")
+	}
+}
+
 func TestFailuresPreservePreviousOutput(t *testing.T) {
 	for _, bad := range []string{"[Missing](missing.md)", "[Anchor](#absent)", "[Template](docs/guide/TEMPLATE.md)", "![Asset](docs/image.png)", "[Outside](../outside.md)"} {
 		t.Run(bad, func(t *testing.T) {
@@ -258,6 +315,9 @@ func TestRawHTMLIsDisabledAndMetadataEscaped(t *testing.T) {
 	}
 	if !strings.Contains(page, "&lt;script&gt;bad()") {
 		t.Fatal("metadata not escaped")
+	}
+	if strings.Contains(page, `" onload="bad()`) {
+		t.Fatal("description attribute not escaped")
 	}
 }
 

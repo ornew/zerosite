@@ -53,7 +53,7 @@ generator pin together at that revision.
 | `lang` | string | `en` | Required nonempty HTML language value |
 | `repository` | string | empty | Optional repository URL for source links |
 | `branch` | string | `main` | Branch used in generated source links |
-| `siteURL` | string | empty | Optional HTTP(S) origin only; enables canonical URLs, sitemap and robots output |
+| `siteURL` | string | empty | Optional HTTP(S) origin only; enables canonical and Open Graph page URLs, sitemap and robots output |
 | `basePath` | string | `/` | Deployment URL prefix, independent of `siteURL`; must be an absolute path without traversal, query, fragment or backslash |
 
 ## Publication and routes
@@ -197,6 +197,7 @@ front matter:
 | `draft` | boolean | false | True omits the page unless drafts are enabled |
 | `nav` | boolean | true | False hides the page from navigation and adjacent-page links |
 | `search` | boolean | true | False excludes the page from the search index |
+| `noIndex` | boolean | false | True adds `noindex` robots metadata and omits the page from the sitemap |
 | `toc` | boolean | global `toc` value | Override the page's table of contents |
 
 Front matter is one YAML mapping between opening and closing `---` lines.
@@ -240,7 +241,7 @@ publication and draft filtering.
 
 Custom layouts use Go `html/template` and receive a `View` with `.Config`,
 `.Page`, trusted rendered `.Body`, `.Groups`, `.TOC`, `.Previous`, `.Next`, asset
-URLs, `.Source`, `.Canonical`, and `.URL`. Call `.URL` for a path relative to the
+URLs, `.Source`, `.Canonical`, `.NoIndex`, and `.URL`. Call `.URL` for a path relative to the
 current output page. Generated search, CSS, JS and theme URLs are escaped paths
 relative to the current output page, which supports deployment under a base path.
 The default layout and scripts provide responsive navigation,

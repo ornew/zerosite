@@ -40,6 +40,7 @@ draft: false
 publish: true
 nav: true
 search: true
+noIndex: false
 toc: true
 ---
 ```
@@ -65,6 +66,18 @@ With `prettyURLs: true` (the default), `docs/start.md` becomes
 Routes, aliases and generated files are checked for collisions. A `siteURL`
 provides the canonical URL origin and enables a sitemap and robots file;
 `basePath` independently sets a deployment prefix such as `/manual/`.
+
+## Search engine metadata
+
+Every page carries Open Graph and Twitter Card metadata: the page title, the site
+title, and the page description when one is set. A page without a description
+omits the description tags rather than publishing an empty value. With
+`siteURL`, each page also states its canonical URL as `og:url`.
+
+Set `noIndex: true` in front matter or `defaults` to keep a published page out of
+search results. The page gets `noindex` robots metadata and is left out of the
+sitemap, but it stays in navigation and the local search index; use `nav` and
+`search` to hide it there. Draft previews are always `noindex`.
 
 Markdown links resolve from the source file's directory even when the target has
 a custom permalink. Local pages, assets and heading fragments must resolve.

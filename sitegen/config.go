@@ -115,6 +115,7 @@ type Metadata struct {
 	Draft       *bool     `json:"draft,omitempty" yaml:"draft"`
 	Nav         *bool     `json:"nav,omitempty" yaml:"nav"`
 	Search      *bool     `json:"search,omitempty" yaml:"search"`
+	NoIndex     *bool     `json:"noIndex,omitempty" yaml:"noIndex"`
 	TOC         *bool     `json:"toc,omitempty" yaml:"toc"`
 }
 

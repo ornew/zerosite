@@ -46,7 +46,7 @@ Start from `site/config.json`. Unknown keys fail the build to catch typos.
 |:--|:--|
 | `title`, `description`, `lang` | Site identity, fallback page description, HTML language |
 | `repository`, `branch` | Optional repository URL and branch for source links; blank disables them |
-| `siteURL` | Optional HTTP(S) origin such as `https://docs.example.com`; enables canonical URLs, sitemap and robots file |
+| `siteURL` | Optional HTTP(S) origin such as `https://docs.example.com`; enables canonical and Open Graph page URLs, sitemap and robots file |
 | `basePath` | Deployment prefix, default `/`; use `/project/` for subpath hosting |
 | `include` | Repository-relative Markdown globs |
 | `exclude` | Globs excluded from pages and copied assets; wins over include |
@@ -186,6 +186,7 @@ toc: true
 | `draft` | True omits the page unless drafts are enabled |
 | `nav` | False hides it from navigation and adjacent-page links |
 | `search` | False excludes it from the local search index |
+| `noIndex` | True asks search engines not to index it and omits it from the sitemap |
 | `toc` | Override the global TOC default |
 
 Precedence is engine defaults, matching config defaults in order, then page
@@ -210,7 +211,7 @@ and `math` are disabled by default, and `alignAttributes` defaults to true. With
 it defaults to false.
 
 Hiding a page from navigation or search does not make it private: its HTML is
-still published, and it appears in the sitemap when configured. Use
+still published, and it appears in the sitemap unless it sets `noIndex`. Use
 `publish: false`, draft exclusion, or file exclusion to omit its contents.
 
 ## Links, assets and redirects
@@ -269,7 +270,7 @@ directory; concurrent builds to the same destination are unsupported.
 `layout.html` is the default Go `html/template` layout. A custom template receives
 `View`: `.Config`, `.Page`, trusted rendered `.Body`, `.Groups`, `.TOC`,
 `.Previous`, `.Next`, relative asset URLs, optional `.Source` and `.Canonical`,
-plus `.URL` for relative output paths (`{{call .URL "index.html"}}`). Keep page
+`.NoIndex`, plus `.URL` for relative output paths (`{{call .URL "index.html"}}`). Keep page
 content in `.Body`; do not treat metadata as trusted HTML. Custom templates and
 public assets are trusted project code.
 

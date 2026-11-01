@@ -87,8 +87,8 @@ remain controlled by the shared builder and `Config`.
 additional named template files into the layout. An extension can also supply
 `TemplateFuncs` or return its own layout data through `View`. The standard view
 contains `.Config`, `.Page`, rendered `.Body`, navigation `.Groups`, `.TOC`,
-`.Previous`, `.Next`, output-relative asset URLs, `.Source`, `.Canonical`, and
-`.URL` for constructing output-relative links. The default template is embedded
+`.Previous`, `.Next`, output-relative asset URLs, `.Source`, `.Canonical`,
+`.NoIndex`, and `.URL` for constructing output-relative links. The default template is embedded
 from the selected Zerosite version; paths to the Go module's files do not need
 to be present at runtime.
 

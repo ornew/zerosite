@@ -53,6 +53,12 @@ type View struct {
 	URL                                                 func(string) string
 }
 
+// noIndex reports whether crawlers are asked not to index p: draft previews
+// and pages that opt out with noIndex.
+func noIndex(p *Page) bool {
+	return boolValue(p.Meta.Draft, false) || boolValue(p.Meta.NoIndex, false)
+}
+
 func inside(parent, child string) bool {
 	rel, err := filepath.Rel(parent, child)
 	return err == nil && rel != ".." && !strings.HasPrefix(rel, ".."+string(filepath.Separator))
@@ -516,7 +522,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 		}
 		v := View{Config: c, Page: p, Body: template.HTML(body), Groups: groups, Home: encodePath(relative(p.Output, home)),
 			CSS: encodePath(relative(p.Output, "assets/site.css")), Script: encodePath(relative(p.Output, "assets/site.js")), Theme: encodePath(relative(p.Output, "assets/theme.js"))}
-		v.NoIndex = boolValue(p.Meta.Draft, false)
+		v.NoIndex = noIndex(p)
 		for _, name := range c.Styles {
 			v.Styles = append(v.Styles, encodePath(relative(p.Output, name)))
 		}
@@ -585,7 +591,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 		var b strings.Builder
 		b.WriteString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n")
 		for _, p := range pages {
-			if boolValue(p.Meta.Draft, false) {
+			if noIndex(p) {
 				continue
 			}
 			fmt.Fprintf(&b, "<url><loc>%s</loc></url>\n", html.EscapeString(strings.TrimSuffix(c.SiteURL, "/")+publicURL(c, p.Output)))

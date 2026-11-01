@@ -8,7 +8,7 @@
 - Paths: `-repo` is the input root; `-config`/`-out` are relative to the working directory. Configured source paths are repository-relative.
 - Flags: `-check` validates without writes; `-drafts` includes drafts; `-base-path` overrides deployment prefix; `-serve` builds once, then previews.
 - Identity: `title`, `description`, `lang`; optional `repository`, `branch` for source links.
-- Deployment: `siteURL` is the HTTP(S) origin, `basePath` the separate prefix. An origin enables canonical URLs, sitemap and robots output.
+- Deployment: `siteURL` is the HTTP(S) origin, `basePath` the separate prefix. An origin enables canonical and `og:url` URLs, sitemap and robots output.
 - Publication: `include` selects Markdown, `exclude` wins over includes/assets, `drafts` defaults false. Globs: `*`, `?`, character classes, whole-segment `**`; no braces/negation.
 - Routes: `prettyURLs` selects `topic/index.html` or `topic.html`; README/index become directory indexes. Collisions fail.
 - Navigation: ordered `sections` have globally unique `title`, `match`, optional `collapsed`, `index`, `first`, and nested `children`. Child matches are checked before parent matches. `index` names the README source for ordering; `first` lists sources to prioritize among equal-weight pages.
@@ -26,6 +26,7 @@
 - `layout`: `home` or `doc`; `permalink`/`aliases`: local routes ending in `/` or `.html`.
 - `publish: false`: always omit; `draft: true`: omit unless enabled. File exclusions still win.
 - `nav`, `search`, `toc`: navigation/paging, search and heading TOC controls; `tocDepth` selects the maximum heading level. Hiding navigation/search does not prevent publication.
+- `noIndex: true`: `noindex` robots metadata and sitemap omission; navigation and local search are unaffected. Pages always get Open Graph/Twitter Card tags; empty descriptions are omitted.
 - Precedence: engine defaults → matching config defaults → page metadata. Explicit false/zero override earlier values; unknown fields/types fail.
 - Markdown links resolve against source paths, including custom permalinks. Validate targets/fragments; include local assets explicitly. Excluded-page links fail; external availability is not checked. Raw HTML is disabled by default.
 

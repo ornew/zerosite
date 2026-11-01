@@ -1,12 +1,12 @@
 # Build your first site
 
 This tutorial creates a small Markdown site, checks its links and routes, and
-previews the generated files. Zerosite reads the repository without changing its
+previews the generated files. ZeroSite reads the repository without changing its
 Markdown sources.
 
 ## Create a site repository
 
-Zerosite requires Go 1.27.1 or later. Create a separate directory for the
+ZeroSite requires Go 1.27.1 or later. Create a separate directory for the
 content you want to publish:
 
 ```sh
@@ -58,9 +58,9 @@ early. See the [configuration guide](../guide/configuration.md) for publication
 rules and the [configuration reference](../reference/configuration.md) for all
 fields.
 
-## Pin and run Zerosite
+## Pin and run ZeroSite
 
-Choose a full Zerosite commit SHA and use that same revision for every command.
+Choose a full ZeroSite commit SHA and use that same revision for every command.
 For a published build, replace `FULL_COMMIT_SHA` below with the revision you
 intend to pin. The command fetches that exact Go module version:
 
@@ -74,9 +74,9 @@ The first command validates the inputs without writing output. The second
 creates `site/dist/`; the third rebuilds and serves it at
 `http://localhost:8080`. Preview builds once, so restart it after editing source
 files. Generated output must be new, empty, or marked as output owned by
-Zerosite.
+ZeroSite.
 
-To run from a Zerosite source checkout, use the checkout path instead of a
+To run from a ZeroSite source checkout, use the checkout path instead of a
 published module version:
 
 ```sh

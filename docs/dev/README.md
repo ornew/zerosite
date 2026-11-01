@@ -1,6 +1,6 @@
 # Development
 
-Zerosite is a Go documentation generator. Its command and reusable `sitegen`,
+ZeroSite is a Go documentation generator. Its command and reusable `sitegen`,
 `render`, and `publish` packages live in one Go module at the repository root. The `site/`
 directory configures the documentation site for this source checkout; it is not
 a separate Go module.
@@ -38,7 +38,7 @@ evidence of a deployed site.
 
 Write user instructions in tutorials, guides, recipes and reference pages.
 Keep development setup here and site-maintenance details in [site maintenance](site.md).
-The Zerosite skill source is `.agents/skills/zerosite/`; the build embeds that
+The ZeroSite skill source is `.agents/skills/zerosite/`; the build embeds that
 directory into the CLI. Keep its configuration reference aligned with the
 standard CLI and `sitegen.BuildWith`, which share the same config and publication
 pipeline.

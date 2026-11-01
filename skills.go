@@ -51,7 +51,7 @@ func skillCommand(args []string) error {
 	if err := writeSkill(*out); err != nil {
 		return err
 	}
-	fmt.Printf("installed Zerosite skill (%s) in %s\n", version(), *out)
+	fmt.Printf("installed ZeroSite skill (%s) in %s\n", version(), *out)
 	return nil
 }
 
@@ -147,7 +147,7 @@ func writeSkill(out string) error {
 		return err
 	}
 	defer os.RemoveAll(stage)
-	files[".zerosite-skill"] = []byte("Zerosite embedded skill v1\n")
+	files[".zerosite-skill"] = []byte("ZeroSite embedded skill v1\n")
 	files[".zerosite-version"] = []byte(version() + "\n")
 	for name, data := range files {
 		p := filepath.Join(stage, filepath.FromSlash(name))

@@ -1,4 +1,4 @@
-# Zerosite Configuration
+# ZeroSite Configuration
 
 - Read `site/build.sh`, `site/config.json` and `site/zerosite.rev` first. The CLI and `sitegen.BuildWith` share the standard config and pipeline; lower-level custom drivers may define different contracts.
 - `site/zerosite.rev` pins the generator and installed skill to the same commit. The selected command embeds its own skill; run `zerosite skill -out .agents/skills/zerosite` through `hack/update-zerosite-skill.sh`. Do not copy a newer skill independently.

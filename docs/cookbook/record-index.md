@@ -1,7 +1,7 @@
 # Generate an index of numbered records
 
 Use `recordIndexes` to build a Markdown table from numbered files in a
-directory. Zerosite generates the configured source in memory, so you do not
+directory. ZeroSite generates the configured source in memory, so you do not
 need to maintain a duplicate index file. Existing source Markdown is never
 rewritten.
 
@@ -39,7 +39,7 @@ the build.
 
 Add this object to the site's configuration. The source path must match an
 `include` pattern and not match `exclude`. This example assumes there is no
-physical `docs/decisions/README.md`; Zerosite supplies that virtual Markdown
+physical `docs/decisions/README.md`; ZeroSite supplies that virtual Markdown
 page and routes it as the directory index.
 
 ```json

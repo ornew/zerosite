@@ -1,5 +1,5 @@
 // Package publish plans and atomically publishes documentation output produced
-// by Zerosite or a project extension driver. Source and theme policy stay with
+// by ZeroSite or a project extension driver. Source and theme policy stay with
 // the caller; ownership, staging and failure recovery are shared.
 package publish
 

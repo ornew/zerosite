@@ -1,4 +1,4 @@
-// Package render supplies Markdown and record-index rendering for Zerosite
+// Package render supplies Markdown and record-index rendering for ZeroSite
 // and project extensions, without assuming a project language or theme.
 package render
 

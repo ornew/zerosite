@@ -1,9 +1,9 @@
-# Maintain the Zerosite site
+# Maintain the ZeroSite site
 
-The Zerosite repository builds its own documentation from the root Go module.
+The ZeroSite repository builds its own documentation from the root Go module.
 From the repository root, `sh site/build.sh` changes into `site/` and runs the
 root checkout with `-repo .. -config config.json -out dist`. It does not download
-another Zerosite revision and does not support `ZEROSITE_SOURCE` or
+another ZeroSite revision and does not support `ZEROSITE_SOURCE` or
 `ZEROSITE_BIN` overrides.
 
 ## Build and inspect
@@ -19,7 +19,7 @@ sh site/build.sh -serve localhost:8080
 The output is `site/dist/`, which is ignored by Git. `-check` validates without
 writing; a successful build replaces generated pages and assets after checking
 the inputs. A failed build preserves the prior output. The output directory must
-be new, empty, or marked as owned by Zerosite. Preview builds once; rebuild and
+be new, empty, or marked as owned by ZeroSite. Preview builds once; rebuild and
 restart it after editing content or configuration.
 
 The `site/config.json` file controls the repository's published Markdown,
@@ -31,7 +31,7 @@ lists all standard fields and flags. Do not hand-edit `site/dist/`.
 
 The wrapper in this repository builds the current source checkout, which is
 useful when changing the generator or its site. A consuming project should pin a
-full Zerosite commit instead of relying on a neighboring checkout. From that
+full ZeroSite commit instead of relying on a neighboring checkout. From that
 project's root, a fixed-revision build can use:
 
 ```sh

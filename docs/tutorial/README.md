@@ -4,5 +4,5 @@ Learn to build and publish a small documentation site.
 
 ## Contents
 
-- [Build your first site](first-site.md): create a repository, configure Zerosite,
+- [Build your first site](first-site.md): create a repository, configure ZeroSite,
   validate it, build output and preview it locally.

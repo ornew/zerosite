@@ -1,6 +1,6 @@
-# Zerosite
+# ZeroSite
 
-Zerosite is an independent Go command that renders repository Markdown into a static site.
+ZeroSite is an independent Go command that renders repository Markdown into a static site.
 It has no dependency on the project's implementation, its root module, or a
 neighboring checkout. Repository-specific policy lives in a JSON configuration.
 
@@ -12,7 +12,7 @@ neighboring checkout. Repository-specific policy lives in a JSON configuration.
 
 ## Build and preview
 
-Requires Go 1.27.1 or later. From the Zerosite repository root:
+Requires Go 1.27.1 or later. From the ZeroSite repository root:
 
 ```sh
 sh site/build.sh
@@ -275,11 +275,11 @@ content in `.Body`; do not treat metadata as trusted HTML. Custom templates and
 public assets are trusted project code.
 
 The Go command, module, tests, embedded `layout.html` and `static/` live at the
-repository root. `site/config.json` configures Zerosite's own documentation site;
+repository root. `site/config.json` configures ZeroSite's own documentation site;
 `site/build.sh` builds it using the root command. The compiled binary embeds its
 fallback assets and runs independently of this checkout.
 
-Zerosite began as the site tooling of `ornew/template-basic` and uses that OSS
+ZeroSite began as the site tooling of `ornew/template-basic` and uses that OSS
 documentation template itself. Adopting projects can pin a published commit
 without waiting for a tagged release.
 

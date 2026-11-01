@@ -1,7 +1,7 @@
 # Vendored KaTeX
 
 The files in `sitegen/static/math/` come from the npm package `katex` version
-0.19.1, licensed under the MIT license (`LICENSE`). Zerosite publishes them under
+0.19.1, licensed under the MIT license (`LICENSE`). ZeroSite publishes them under
 `assets/math/`. This note records how the vendored copy was made, so that it can
 be made again. It lives outside `static/` so that the build does not publish it.
 
@@ -17,7 +17,7 @@ be made again. It lives outside `static/` so that the build does not publish it.
 
 ## Edit to katex.min.css
 
-The package names three sources for each font: WOFF2, WOFF and TrueType. Zerosite
+The package names three sources for each font: WOFF2, WOFF and TrueType. ZeroSite
 ships only the WOFF2 fonts, so the WOFF and TrueType sources are removed. Every
 `@font-face` rule keeps its WOFF2 source, and no other byte of the stylesheet
 changes. The edit is one `sed` command, run on the original file:
@@ -32,7 +32,7 @@ The result has 20 `url(fonts/…woff2)` references, and its sha512 is:
 84c3984d0ca0c39466f5a4ba4d0808c027d2e4d7c391abad83db3a27ec746588e7b9b2d886109641c4e64c20cb5ca1a372e33f2b41049ad418167784e25ea897
 ```
 
-## Zerosite-only stylesheet
+## ZeroSite-only stylesheet
 
 `math.css` is not from KaTeX. It holds the layout rule for display formulas and
 is linked from the pages that contain a formula, next to `katex.min.css`.

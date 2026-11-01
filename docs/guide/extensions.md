@@ -1,7 +1,7 @@
 # Extend the Go site generator
 
 The `sitegen` package provides `BuildWith` for projects that need a small amount
-of project-specific content or rendering while retaining Zerosite's Markdown
+of project-specific content or rendering while retaining ZeroSite's Markdown
 publication, routing, link checks, navigation, search and safe output pipeline.
 Use the standard CLI when configuration is sufficient; use extensions for
 behavior that needs Go code.
@@ -89,7 +89,7 @@ additional named template files into the layout. An extension can also supply
 contains `.Config`, `.Page`, rendered `.Body`, navigation `.Groups`, `.TOC`,
 `.Previous`, `.Next`, output-relative asset URLs, `.Source`, `.Canonical`,
 `.NoIndex`, and `.URL` for constructing output-relative links. The default template is embedded
-from the selected Zerosite version; paths to the Go module's files do not need
+from the selected ZeroSite version; paths to the Go module's files do not need
 to be present at runtime.
 
 ## Keep custom behavior small

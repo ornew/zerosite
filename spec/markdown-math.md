@@ -61,8 +61,8 @@ Formula content:
 
 Deviations from GitHub, which renders some formulas differently: inside a
 formula, GitHub treats `\$` as the closing delimiter and processes Markdown
-escapes and emphasis first; Zerosite does neither. GitHub also unescapes `\$`
-before it looks for delimiters, so `\$x\$` renders as a formula there. Zerosite
+escapes and emphasis first; ZeroSite does neither. GitHub also unescapes `\$`
+before it looks for delimiters, so `\$x\$` renders as a formula there. ZeroSite
 keeps `\$x\$` as text.
 
 ## Output
@@ -99,7 +99,7 @@ or not a page uses them:
 
 Every `url()` in `katex.min.css` names one of the published fonts. The
 stylesheet was edited from the upstream package as described in the vendor note
-of the Zerosite source tree, `sitegen/math/VENDOR.md`.
+of the ZeroSite source tree, `sitegen/math/VENDOR.md`.
 
 The files are published even when `bundledAssets` is `false`, because they
 belong to the option, not to the default theme.

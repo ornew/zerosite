@@ -5,6 +5,9 @@
   "repository": "https://github.com/ornew/zerosite",
   "branch": "main",
   "siteURL": "https://zerosite.ornew.dev",
+  "sitemap": {
+    "lastmod": "git"
+  },
   "basePath": "/",
   "include": [
     "README.md",

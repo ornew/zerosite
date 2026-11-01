@@ -54,7 +54,9 @@ drafts. Front matter can set page title, navigation label, section, weight,
 permalink, aliases, publication, draft, search, `noIndex` and TOC behavior.
 `siteURL` is the production origin `https://zerosite.ornew.dev`, so every build,
 including Netlify deploy previews, states that origin in canonical URLs, the
-sitemap and `robots.txt`. `netlify.toml` redirects the Netlify subdomain
+sitemap and `robots.txt`. `sitemap.lastmod` is `git`, so the build needs full
+history; list commits that only rename or respell in `.git-blame-ignore-revs`.
+`netlify.toml` redirects the Netlify subdomain
 `zerosite-go.netlify.app` there. `basePath` separately configures subpath
 hosting. Local builds do not verify DNS, remote URLs or deployment.
 

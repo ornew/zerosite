@@ -1,0 +1,7 @@
+# Commits that changed names or spelling without changing what pages say.
+# git blame and sitemap lastmod skip them.
+
+# Rename the project from Nanosite to Zerosite
+2541793dc48eff3b8b9389a1ba01539e6d4d365f
+# Spell the project name as ZeroSite in prose
+2e4b6a6c4f63c12972a3fbe1366a0879f1ab1269

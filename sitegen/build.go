@@ -391,7 +391,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 		if byOutput[to] == nil {
 			return nil, fmt.Errorf("redirect %s must target a published page: %s", from, to)
 		}
-		href := encodePath(relative(from, to))
+		href := c.href(from, to)
 		data := []byte(fmt.Sprintf("<!doctype html><html lang=\"%s\"><head><meta charset=\"utf-8\"><meta http-equiv=\"refresh\" content=\"0;url=%s\"><title>Page moved</title></head><body><a href=\"%s\">Continue to the new page</a></body></html>", html.EscapeString(c.Lang), html.EscapeString(href), html.EscapeString(href)))
 		if c.RedirectTemplate != "" {
 			file, e := localInput(repo, c.RedirectTemplate)
@@ -526,7 +526,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 		if e != nil {
 			return nil, e
 		}
-		v := View{Config: c, Page: p, Body: template.HTML(body), Groups: groups, Home: encodePath(relative(p.Output, home)),
+		v := View{Config: c, Page: p, Body: template.HTML(body), Groups: groups, Home: c.href(p.Output, home),
 			CSS: encodePath(relative(p.Output, "assets/site.css")), Script: encodePath(relative(p.Output, "assets/site.js")), Theme: encodePath(relative(p.Output, "assets/theme.js"))}
 		v.NoIndex = noIndex(p)
 		for _, name := range c.Styles {
@@ -541,7 +541,7 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 			}
 			v.Scripts = append(v.Scripts, encodePath(relative(p.Output, mathScript)))
 		}
-		v.URL = func(to string) string { return encodePath(relative(p.Output, to)) }
+		v.URL = func(to string) string { return c.href(p.Output, to) }
 		if boolValue(p.Meta.TOC, c.TOC) {
 			for _, h := range p.Headings {
 				if h.Level >= 2 && h.Level <= tocDepth(c) {
@@ -583,14 +583,25 @@ func buildWith(repo, out string, c Config, check bool, extension Extensions) (*R
 			return nil, err
 		}
 	}
-	if len(redirects) > 0 && boolValue(c.RedirectRules, true) {
+	if boolValue(c.RedirectRules, true) {
 		var b strings.Builder
 		keys := sortedKeys(redirects)
 		for _, from := range keys {
 			fmt.Fprintf(&b, "%s %s 301\n", publicURL(c, from), publicURL(c, redirects[from]))
 		}
-		if err := reserve("_redirects", []byte(b.String())); err != nil {
-			return nil, err
+		if c.directoryLinks() {
+			// The host serves the file at .../index.html next to the directory
+			// URL. Force a redirect (!) because a file would shadow the rule.
+			for _, p := range pages {
+				if _, ok := redirects[p.Output]; !ok && path.Base(p.Output) == "index.html" {
+					fmt.Fprintf(&b, "%s %s 301!\n", c.BasePath+encodePath(p.Output), publicURL(c, p.Output))
+				}
+			}
+		}
+		if b.Len() > 0 {
+			if err := reserve("_redirects", []byte(b.String())); err != nil {
+				return nil, err
+			}
 		}
 	}
 	if c.SiteURL != "" {

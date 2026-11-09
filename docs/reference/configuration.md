@@ -91,7 +91,7 @@ for collisions.
 | `templates` | string array | empty | Repository-relative Go template files parsed as named templates in the layout |
 | `styles` | string array | empty | Existing output-relative stylesheets, loaded after built-in CSS |
 | `scripts` | string array | empty | Existing output-relative scripts, loaded after built-in JavaScript |
-| `directoryLinks` | boolean | false | Use directory URLs for index pages and search result links |
+| `directoryLinks` | boolean | true with `siteURL`, else false | Use directory URLs for index pages in every internal link and in search results |
 | `repositoryLinks` | boolean | false | When a local link is not a published page or asset, link to its file or directory in the configured repository |
 | `bundledAssets` | boolean | true | Copy built-in CSS, JavaScript and theme assets. Math assets under `assets/math/` are published whenever `markdown.math` is true, whatever this setting |
 | `redirectRules` | boolean | true | Emit the Netlify `_redirects` file for page redirects and aliases |
@@ -124,7 +124,14 @@ no neighbors.
 first matching pattern's position, independently of navigation order; unmatched
 pages retain their stable order after matched pages.
 
-With `directoryLinks: true`, directory index pages use trailing-slash routes.
+With `directoryLinks` on, directory index pages use trailing-slash routes in
+navigation, pager, home, body and search links, so every internal link names
+the URL that the canonical tag and the sitemap name. It defaults to on when
+`siteURL` is set; sites opened from the file system keep `index.html` links
+without `siteURL`. With it on, `_redirects` also gets a forced permanent rule
+(`/docs/guide/index.html /docs/guide/ 301!`) for each index page, so the file
+form of a page redirects to its directory URL on hosts that read the Netlify
+file.
 When `repositoryLinks` is enabled, unresolved source links that refer to a
 repository file or directory prefer the configured repository URL over an
 incidental published route with the same filename.

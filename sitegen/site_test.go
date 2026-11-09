@@ -208,6 +208,9 @@ func TestRoutesAliasesAndFlatURLs(t *testing.T) {
 	c.PrettyURLs = false
 	c.BasePath = "/project/"
 	c.SiteURL = "https://example.com"
+	// Opt out of the siteURL default so that file-style links stay covered.
+	off := false
+	c.DirectoryLinks = &off
 	put(t, repo, "README.md", "# Home\n[Intro](docs/guide/intro.md#heading)\n")
 	put(t, repo, "docs/guide/intro.md", "---\npermalink: /learn/start/\naliases: [/old.html]\n---\n# Intro\n## Heading\n[Flat](flat.md)\n")
 	put(t, repo, "docs/guide/flat.md", "# Flat\n[Alias](/old.html#heading)\n")

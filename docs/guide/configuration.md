@@ -140,7 +140,7 @@ adds heading fragments as search results; it defaults to false. Per-page
 
 Additional `sitegen` settings include `tocDepth`, which sets the deepest TOC and
 search heading level (2–6, default 4), and `directoryLinks`, which uses
-directory URLs for index pages and search results. `repositoryLinks` can turn
+directory URLs for index pages and search results (default: on when `siteURL` is set). `repositoryLinks` can turn
 unresolved local source links into repository links when `repository` is
 configured; repository file/directory links take precedence over an incidental
 published route with the same filename. `searchIndex` customizes the search output path, JavaScript

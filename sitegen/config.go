@@ -20,7 +20,7 @@ type Config struct {
 	RedirectRules    *bool               `json:"redirectRules"`
 	BundledAssets    *bool               `json:"bundledAssets"`
 	Templates        []string            `json:"templates"`
-	DirectoryLinks   bool                `json:"directoryLinks"`
+	DirectoryLinks   *bool               `json:"directoryLinks"`
 	RepositoryLinks  bool                `json:"repositoryLinks"`
 	TOCDepth         int                 `json:"tocDepth"`
 	Order            []string            `json:"order"`

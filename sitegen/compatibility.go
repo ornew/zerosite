@@ -68,6 +68,25 @@ func indexTableClass(c Config, source string) string {
 	return ""
 }
 
+// directoryLinks reports whether links to index pages use the trailing-slash
+// URL. It defaults to on when siteURL is set, so that every internal link
+// names the URL the canonical tag and the sitemap name, and to off otherwise,
+// so that a site opened from the file system keeps working.
+func (c Config) directoryLinks() bool { return boolValue(c.DirectoryLinks, c.SiteURL != "") }
+
+// href returns the URL, relative to the page output from, of the output to.
+func (c Config) href(from, to string) string {
+	if !c.directoryLinks() || path.Base(to) != "index.html" {
+		return encodePath(relative(from, to))
+	}
+	// Resolve against a placeholder file so that "." stays a directory link.
+	r := strings.TrimSuffix(relative(from, path.Join(path.Dir(to), "_")), "_")
+	if r == "" {
+		r = "./"
+	}
+	return encodePath(r)
+}
+
 func resolveConfiguredLink(repo string, c Config, p *Page, raw string, bySource, byOutput map[string]*Page, assets map[string]string, redirects map[string]string, generated map[string][]byte) (string, error) {
 	if c.RepositoryLinks && c.Repository != "" {
 		u, e := url.Parse(raw)
@@ -87,7 +106,7 @@ func resolveConfiguredLink(repo string, c Config, p *Page, raw string, bySource,
 	}
 	result, err := resolveLink(p, raw, bySource, byOutput, assets, redirects, generated)
 	if err == nil {
-		if c.DirectoryLinks {
+		if c.directoryLinks() {
 			u, e := url.Parse(result)
 			if e == nil && !u.IsAbs() && u.Host == "" && path.Base(u.Path) == "index.html" {
 				u.Path = strings.TrimSuffix(u.Path, "index.html")
@@ -160,7 +179,7 @@ func searchEntries(p *Page, body string, groups []NavGroup, c Config) []map[stri
 		text = *p.SearchText
 	}
 	target := encodePath(p.Output)
-	if c.DirectoryLinks {
+	if c.directoryLinks() {
 		target = encodePath(pageURL(p.Output))
 	}
 	section := p.Section
